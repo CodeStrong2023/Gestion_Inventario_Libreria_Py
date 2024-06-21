@@ -6,6 +6,7 @@ Aplicación de escritorio orientada a realizar las funciones de administración 
 La aplicación está desarrollada con las siguientes tecnologías:
 - Python
 - MySQL
+- PyQT
 - 
 
 ## Características Principales
