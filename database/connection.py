@@ -1,7 +1,8 @@
 import sqlite3
 from database.create_tables import CreateTables
 from database.insert_initial_data import CreateInitialData
-
+from Back.Clases import Rol
+from Back.CRUD import Crud
 class Connection:
     
     def __init__(self):
@@ -11,7 +12,13 @@ class Connection:
             self.insertInitialData()
         except Exception as e:
             print(e)
-            
+    
+    def abrirConexion(self):
+        return self.conn
+    
+    def cerrarConexion(self):
+        self.conn.close()
+                
     def createTables(self):        
         # Create all tables
         cursor = self.conn.cursor()
@@ -62,8 +69,6 @@ class Connection:
         cursor.execute(CreateInitialData.asociarLibros())
         cursor.execute(CreateInitialData.asociarRevistas())
         cursor.execute(CreateInitialData.crearVenta())
-        
-        
         
         self.conn.commit()
         cursor.close()
