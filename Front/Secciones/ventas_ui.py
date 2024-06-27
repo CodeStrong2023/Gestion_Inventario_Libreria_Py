@@ -5,35 +5,42 @@ class Ui_FormVentas(object):
     def setupUi(self, FormVentas):
         FormVentas.setObjectName("FormVentas")
         FormVentas.resize(900, 791)
+        
         self.frameVentas = QtWidgets.QFrame(parent=FormVentas)
         self.frameVentas.setGeometry(QtCore.QRect(0, 0, 901, 791))
         self.frameVentas.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.frameVentas.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameVentas.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameVentas.setObjectName("frameVentas")
+        
         self.BotonBuscarVen = QtWidgets.QPushButton(parent=self.frameVentas)
         self.BotonBuscarVen.setGeometry(QtCore.QRect(560, 100, 91, 31))
         self.BotonBuscarVen.setStyleSheet("background-color: rgb(0, 85, 255);")
         self.BotonBuscarVen.setObjectName("BotonBuscarVen")
+        
         self.BotonNuevaVen = QtWidgets.QPushButton(parent=self.frameVentas)
         self.BotonNuevaVen.setGeometry(QtCore.QRect(770, 100, 91, 31))
         self.BotonNuevaVen.setStyleSheet("background-color: rgb(0, 255, 127);")
         self.BotonNuevaVen.setObjectName("BotonNuevaVen")
+        
         self.stackedWidget_3 = QtWidgets.QStackedWidget(parent=self.frameVentas)
         self.stackedWidget_3.setGeometry(QtCore.QRect(50, 170, 811, 591))
         self.stackedWidget_3.setObjectName("stackedWidget_3")
+        
         self.BuscarVentas = QtWidgets.QWidget()
         self.BuscarVentas.setObjectName("BuscarVentas")
+        
         self.frame_8 = QtWidgets.QFrame(parent=self.BuscarVentas)
         self.frame_8.setGeometry(QtCore.QRect(0, 0, 811, 591))
         self.frame_8.setStyleSheet("background-color: rgb(235, 235, 235);")
         self.frame_8.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_8.setObjectName("frame_8")
+        
         self.tablaVentas = QtWidgets.QTableWidget(parent=self.frame_8)
         self.tablaVentas.setGeometry(QtCore.QRect(0, 0, 811, 591))
         self.tablaVentas.setObjectName("tablaVentas")
-        self.tablaVentas.setColumnCount(8)
+        self.tablaVentas.setColumnCount(9)
         self.tablaVentas.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tablaVentas.setHorizontalHeaderItem(0, item)
@@ -51,30 +58,40 @@ class Ui_FormVentas(object):
         self.tablaVentas.setHorizontalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
         self.tablaVentas.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tablaVentas.setHorizontalHeaderItem(8, item)
         self.stackedWidget_3.addWidget(self.BuscarVentas)
+        
         self.NuevaVenta_2 = QtWidgets.QWidget()
         self.NuevaVenta_2.setObjectName("NuevaVenta_2")
+        
         self.frame_9 = QtWidgets.QFrame(parent=self.NuevaVenta_2)
         self.frame_9.setGeometry(QtCore.QRect(170, 40, 411, 531))
         self.frame_9.setStyleSheet("border-color: rgb(6, 6, 6);")
         self.frame_9.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_9.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_9.setObjectName("frame_9")
+        
         self.inputFechaven = QtWidgets.QLineEdit(parent=self.frame_9)
         self.inputFechaven.setGeometry(QtCore.QRect(230, 30, 113, 20))
         self.inputFechaven.setObjectName("inputFechaven")
+        
         self.inputUsuarioVen = QtWidgets.QLineEdit(parent=self.frame_9)
         self.inputUsuarioVen.setGeometry(QtCore.QRect(230, 70, 113, 20))
         self.inputUsuarioVen.setObjectName("inputUsuarioVen")
+        
         self.InputEnvioVem = QtWidgets.QLineEdit(parent=self.frame_9)
         self.InputEnvioVem.setGeometry(QtCore.QRect(230, 110, 113, 20))
         self.InputEnvioVem.setObjectName("InputEnvioVem")
+        
         self.inputArticulo = QtWidgets.QLineEdit(parent=self.frame_9)
         self.inputArticulo.setGeometry(QtCore.QRect(230, 150, 113, 20))
         self.inputArticulo.setObjectName("inputArticulo")
+        
         self.inputTipoVen = QtWidgets.QLineEdit(parent=self.frame_9)
         self.inputTipoVen.setGeometry(QtCore.QRect(230, 260, 113, 20))
         self.inputTipoVen.setObjectName("inputTipoVen")
+        
         self.label_14 = QtWidgets.QLabel(parent=self.frame_9)
         self.label_14.setGeometry(QtCore.QRect(90, 30, 47, 13))
         self.label_14.setObjectName("label_14")
@@ -90,17 +107,21 @@ class Ui_FormVentas(object):
         self.label_18 = QtWidgets.QLabel(parent=self.frame_9)
         self.label_18.setGeometry(QtCore.QRect(180, 220, 101, 20))
         self.label_18.setObjectName("label_18")
+        
         self.botonCrearVen = QtWidgets.QPushButton(parent=self.frame_9)
         self.botonCrearVen.setGeometry(QtCore.QRect(150, 410, 101, 41))
         self.botonCrearVen.setStyleSheet("\n"
 "background-color: rgb(85, 255, 127);")
         self.botonCrearVen.setObjectName("botonCrearVen")
+        
         self.InputCuotasVen = QtWidgets.QLineEdit(parent=self.frame_9)
         self.InputCuotasVen.setGeometry(QtCore.QRect(230, 300, 113, 20))
         self.InputCuotasVen.setObjectName("InputCuotasVen")
+    
         self.inputOrigenVen = QtWidgets.QLineEdit(parent=self.frame_9)
         self.inputOrigenVen.setGeometry(QtCore.QRect(230, 340, 113, 20))
         self.inputOrigenVen.setObjectName("inputOrigenVen")
+        
         self.label_50 = QtWidgets.QLabel(parent=self.frame_9)
         self.label_50.setGeometry(QtCore.QRect(90, 260, 51, 20))
         self.label_50.setObjectName("label_50")
@@ -114,6 +135,7 @@ class Ui_FormVentas(object):
         self.label_53.setGeometry(QtCore.QRect(90, 110, 71, 16))
         self.label_53.setObjectName("label_53")
         self.stackedWidget_3.addWidget(self.NuevaVenta_2)
+        
         self.ModificaVenta = QtWidgets.QWidget()
         self.ModificaVenta.setObjectName("ModificaVenta")
         self.frame_10 = QtWidgets.QFrame(parent=self.ModificaVenta)
@@ -122,21 +144,27 @@ class Ui_FormVentas(object):
         self.frame_10.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_10.setObjectName("frame_10")
+        
         self.inputFechaModVen = QtWidgets.QLineEdit(parent=self.frame_10)
         self.inputFechaModVen.setGeometry(QtCore.QRect(230, 30, 113, 20))
         self.inputFechaModVen.setObjectName("inputFechaModVen")
+        
         self.inputUsuarioModVen = QtWidgets.QLineEdit(parent=self.frame_10)
         self.inputUsuarioModVen.setGeometry(QtCore.QRect(230, 70, 113, 20))
         self.inputUsuarioModVen.setObjectName("inputUsuarioModVen")
+        
         self.inputEnvioModVen = QtWidgets.QLineEdit(parent=self.frame_10)
         self.inputEnvioModVen.setGeometry(QtCore.QRect(230, 110, 113, 20))
         self.inputEnvioModVen.setObjectName("inputEnvioModVen")
+        
         self.inputArticuloModVen = QtWidgets.QLineEdit(parent=self.frame_10)
         self.inputArticuloModVen.setGeometry(QtCore.QRect(230, 150, 113, 20))
         self.inputArticuloModVen.setObjectName("inputArticuloModVen")
+        
         self.inputPagoTipoModVen = QtWidgets.QLineEdit(parent=self.frame_10)
         self.inputPagoTipoModVen.setGeometry(QtCore.QRect(230, 260, 113, 20))
         self.inputPagoTipoModVen.setObjectName("inputPagoTipoModVen")
+        
         self.label_19 = QtWidgets.QLabel(parent=self.frame_10)
         self.label_19.setGeometry(QtCore.QRect(90, 30, 47, 13))
         self.label_19.setObjectName("label_19")
@@ -152,16 +180,20 @@ class Ui_FormVentas(object):
         self.label_23 = QtWidgets.QLabel(parent=self.frame_10)
         self.label_23.setGeometry(QtCore.QRect(180, 220, 101, 20))
         self.label_23.setObjectName("label_23")
+        
         self.BotonCrearModVen = QtWidgets.QPushButton(parent=self.frame_10)
         self.BotonCrearModVen.setGeometry(QtCore.QRect(150, 410, 101, 41))
         self.BotonCrearModVen.setStyleSheet("background-color: rgb(255, 255, 127);")
         self.BotonCrearModVen.setObjectName("BotonCrearModVen")
+        
         self.inputPagoCuotasModVen = QtWidgets.QLineEdit(parent=self.frame_10)
         self.inputPagoCuotasModVen.setGeometry(QtCore.QRect(230, 300, 113, 20))
         self.inputPagoCuotasModVen.setObjectName("inputPagoCuotasModVen")
+        
         self.inputPagoOrigenModVen = QtWidgets.QLineEdit(parent=self.frame_10)
         self.inputPagoOrigenModVen.setGeometry(QtCore.QRect(230, 340, 113, 20))
         self.inputPagoOrigenModVen.setObjectName("inputPagoOrigenModVen")
+        
         self.label_54 = QtWidgets.QLabel(parent=self.frame_10)
         self.label_54.setGeometry(QtCore.QRect(90, 260, 51, 20))
         self.label_54.setObjectName("label_54")
@@ -172,9 +204,11 @@ class Ui_FormVentas(object):
         self.label_56.setGeometry(QtCore.QRect(90, 340, 51, 20))
         self.label_56.setObjectName("label_56")
         self.stackedWidget_3.addWidget(self.ModificaVenta)
+        
         self.inputbuscarVen = QtWidgets.QLineEdit(parent=self.frameVentas)
         self.inputbuscarVen.setGeometry(QtCore.QRect(190, 100, 371, 31))
         self.inputbuscarVen.setObjectName("inputbuscarVen")
+        
         self.label_24 = QtWidgets.QLabel(parent=self.frameVentas)
         self.label_24.setGeometry(QtCore.QRect(50, 90, 101, 41))
         self.label_24.setStyleSheet("font: 75 18pt \"MS Shell Dlg 2\";")
@@ -194,6 +228,7 @@ class Ui_FormVentas(object):
         FormVentas.setWindowTitle(_translate("FormVentas", "Form"))
         self.BotonBuscarVen.setText(_translate("FormVentas", "Buscar ventas"))
         self.BotonNuevaVen.setText(_translate("FormVentas", "Nueva venta"))
+        
         item = self.tablaVentas.horizontalHeaderItem(0)
         item.setText(_translate("FormVentas", "id"))
         item = self.tablaVentas.horizontalHeaderItem(1)
@@ -207,9 +242,12 @@ class Ui_FormVentas(object):
         item = self.tablaVentas.horizontalHeaderItem(5)
         item.setText(_translate("FormVentas", "Pago"))
         item = self.tablaVentas.horizontalHeaderItem(6)
-        item.setText(_translate("FormVentas", "Actualizar"))
+        item.setText(_translate("FormVentas", "factura"))
         item = self.tablaVentas.horizontalHeaderItem(7)
+        item.setText(_translate("FormVentas", "Actualizar"))
+        item = self.tablaVentas.horizontalHeaderItem(8)
         item.setText(_translate("FormVentas", "Borrar"))
+        
         self.label_14.setText(_translate("FormVentas", "Fecha"))
         self.label_15.setText(_translate("FormVentas", "Usuario"))
         self.label_16.setText(_translate("FormVentas", "Envio"))

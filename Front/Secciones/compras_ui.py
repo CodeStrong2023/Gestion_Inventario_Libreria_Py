@@ -74,18 +74,23 @@ class Ui_FormCompra(object):
         self.inputAlmacenamientoCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.inputAlmacenamientoCom.setGeometry(QtCore.QRect(230, 30, 113, 20))
         self.inputAlmacenamientoCom.setObjectName("inputAlmacenamientoCom")
+        
         self.inputFechaCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.inputFechaCom.setGeometry(QtCore.QRect(230, 70, 113, 20))
         self.inputFechaCom.setObjectName("inputFechaCom")
+        
         self.inputCantidadCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.inputCantidadCom.setGeometry(QtCore.QRect(230, 110, 113, 20))
         self.inputCantidadCom.setObjectName("inputCantidadCom")
+        
         self.inputPrecioUnarioCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.inputPrecioUnarioCom.setGeometry(QtCore.QRect(230, 150, 113, 20))
         self.inputPrecioUnarioCom.setObjectName("inputPrecioUnarioCom")
+        
         self.inputProvedorCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.inputProvedorCom.setGeometry(QtCore.QRect(230, 190, 113, 20))
         self.inputProvedorCom.setObjectName("inputProvedorCom")
+        
         #labels
         self.label_25 = QtWidgets.QLabel(parent=self.frame_13)
         self.label_25.setGeometry(QtCore.QRect(90, 30, 81, 16))
@@ -102,25 +107,31 @@ class Ui_FormCompra(object):
         self.label_29 = QtWidgets.QLabel(parent=self.frame_13)
         self.label_29.setGeometry(QtCore.QRect(90, 190, 101, 20))
         self.label_29.setObjectName("label_29")
+        
         #boton compra
         self.BotonCrearCompra = QtWidgets.QPushButton(parent=self.frame_13)
         self.BotonCrearCompra.setGeometry(QtCore.QRect(160, 410, 101, 41))
         self.BotonCrearCompra.setStyleSheet("\n"
 "background-color: rgb(85, 255, 127);")
         self.BotonCrearCompra.setObjectName("BotonCrearCompra")
+        
         #parte pagos
         self.label_36 = QtWidgets.QLabel(parent=self.frame_13)
         self.label_36.setGeometry(QtCore.QRect(200, 240, 101, 20))
         self.label_36.setObjectName("label_36")
+        
         self.InputOrigenCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.InputOrigenCom.setGeometry(QtCore.QRect(230, 350, 113, 20))
         self.InputOrigenCom.setObjectName("InputOrigenCom")
+        
         self.InputTipoCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.InputTipoCom.setGeometry(QtCore.QRect(230, 270, 113, 20))
         self.InputTipoCom.setObjectName("InputTipoCom")
+        
         self.inputCuotasCom = QtWidgets.QLineEdit(parent=self.frame_13)
         self.inputCuotasCom.setGeometry(QtCore.QRect(230, 310, 113, 20))
         self.inputCuotasCom.setObjectName("inputCuotasCom")
+        
         self.label_37 = QtWidgets.QLabel(parent=self.frame_13)
         self.label_37.setGeometry(QtCore.QRect(90, 270, 101, 20))
         self.label_37.setObjectName("label_37")
@@ -135,22 +146,27 @@ class Ui_FormCompra(object):
         ##nuevo provedor
         self.NuevoProvedor = QtWidgets.QWidget()
         self.NuevoProvedor.setObjectName("NuevoProvedor")
+        
         self.frame_14 = QtWidgets.QFrame(parent=self.NuevoProvedor)
         self.frame_14.setGeometry(QtCore.QRect(210, 50, 411, 291))
         self.frame_14.setStyleSheet("border-color: rgb(6, 6, 6);")
         self.frame_14.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_14.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_14.setObjectName("frame_14")
+        
         #inputs
         self.inputNombreProv = QtWidgets.QLineEdit(parent=self.frame_14)
         self.inputNombreProv.setGeometry(QtCore.QRect(230, 30, 113, 20))
         self.inputNombreProv.setObjectName("inputNombreProv")
+        
         self.inputTelProv = QtWidgets.QLineEdit(parent=self.frame_14)
         self.inputTelProv.setGeometry(QtCore.QRect(230, 70, 113, 20))
         self.inputTelProv.setObjectName("inputTelProv")
+        
         self.InputContactoProv = QtWidgets.QLineEdit(parent=self.frame_14)
         self.InputContactoProv.setGeometry(QtCore.QRect(230, 110, 113, 20))
         self.InputContactoProv.setObjectName("InputContactoProv")
+        
         #labels
         self.label_30 = QtWidgets.QLabel(parent=self.frame_14)
         self.label_30.setGeometry(QtCore.QRect(90, 30, 81, 16))
@@ -161,6 +177,7 @@ class Ui_FormCompra(object):
         self.label_32 = QtWidgets.QLabel(parent=self.frame_14)
         self.label_32.setGeometry(QtCore.QRect(90, 110, 47, 13))
         self.label_32.setObjectName("label_32")
+        
         #boton provedor
         self.BotonCrearProv = QtWidgets.QPushButton(parent=self.frame_14)
         self.BotonCrearProv.setGeometry(QtCore.QRect(140, 190, 101, 41))

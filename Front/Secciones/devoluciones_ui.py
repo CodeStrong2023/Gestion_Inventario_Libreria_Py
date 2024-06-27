@@ -29,6 +29,7 @@ class Ui_FormDevoluciones(object):
         
         self.BuscarDevoluciones = QtWidgets.QWidget()
         self.BuscarDevoluciones.setObjectName("BuscarDevoluciones")
+        
         self.frame_16 = QtWidgets.QFrame(parent=self.BuscarDevoluciones)
         self.frame_16.setGeometry(QtCore.QRect(0, 0, 811, 591))
         self.frame_16.setStyleSheet("background-color: rgb(235, 235, 235);")
@@ -62,24 +63,30 @@ class Ui_FormDevoluciones(object):
         
         self.NuevaDev = QtWidgets.QWidget()
         self.NuevaDev.setObjectName("NuevaDev")
+        
         self.frame_17 = QtWidgets.QFrame(parent=self.NuevaDev)
         self.frame_17.setGeometry(QtCore.QRect(200, 40, 411, 331))
         self.frame_17.setStyleSheet("border-color: rgb(6, 6, 6);")
         self.frame_17.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_17.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_17.setObjectName("frame_17")
+        
         self.MotivoDev = QtWidgets.QLineEdit(parent=self.frame_17)
         self.MotivoDev.setGeometry(QtCore.QRect(230, 30, 113, 20))
         self.MotivoDev.setObjectName("MotivoDev")
+        
         self.FechaDev = QtWidgets.QLineEdit(parent=self.frame_17)
         self.FechaDev.setGeometry(QtCore.QRect(230, 70, 113, 20))
         self.FechaDev.setObjectName("FechaDev")
+        
         self.CantidadDev = QtWidgets.QLineEdit(parent=self.frame_17)
         self.CantidadDev.setGeometry(QtCore.QRect(230, 110, 113, 20))
         self.CantidadDev.setObjectName("CantidadDev")
+        
         self.PagoDev = QtWidgets.QLineEdit(parent=self.frame_17)
         self.PagoDev.setGeometry(QtCore.QRect(230, 150, 113, 20))
         self.PagoDev.setObjectName("PagoDev")
+        
         self.label_57 = QtWidgets.QLabel(parent=self.frame_17)
         self.label_57.setGeometry(QtCore.QRect(90, 30, 81, 16))
         self.label_57.setObjectName("label_57")
@@ -92,22 +99,26 @@ class Ui_FormDevoluciones(object):
         self.label_60 = QtWidgets.QLabel(parent=self.frame_17)
         self.label_60.setGeometry(QtCore.QRect(90, 150, 81, 20))
         self.label_60.setObjectName("label_60")
+        
         self.BotonCrearDev = QtWidgets.QPushButton(parent=self.frame_17)
         self.BotonCrearDev.setGeometry(QtCore.QRect(150, 230, 101, 41))
         self.BotonCrearDev.setStyleSheet("\n"
 "background-color: rgb(85, 255, 127);")
         self.BotonCrearDev.setObjectName("BotonCrearDev")
         self.stackedWidget_5.addWidget(self.NuevaDev)
+        
+        
         self.inputBuscarDev = QtWidgets.QLineEdit(parent=self.frameDevoluciones)
         self.inputBuscarDev.setGeometry(QtCore.QRect(390, 100, 251, 31))
         self.inputBuscarDev.setObjectName("inputBuscarDev")
+        
         self.label_69 = QtWidgets.QLabel(parent=self.frameDevoluciones)
         self.label_69.setGeometry(QtCore.QRect(50, 90, 201, 41))
         self.label_69.setStyleSheet("font: 75 18pt \"MS Shell Dlg 2\";")
         self.label_69.setObjectName("label_69")
 
         self.retranslateUi(FormDevoluciones)
-        self.stackedWidget_5.setCurrentIndex(1)
+        self.stackedWidget_5.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(FormDevoluciones)
         
         #conectar metodos stackwidget   

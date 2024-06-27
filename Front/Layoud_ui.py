@@ -1,12 +1,12 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from Secciones.administracion_ui import Ui_FormAdministracion
+from Secciones.administracionf_ui import Ui_FormADMI
 from Secciones.usuarios_ui import Ui_FormUsuarios
 from Secciones.ventas_ui import Ui_FormVentas
 from Secciones.compras_ui import Ui_FormCompra 
 from Secciones.devoluciones_ui import Ui_FormDevoluciones
-from Secciones.almacen_ui import Ui_FormAlmacen
+from Secciones.almacenf_ui import Ui_FormAmacenf
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -122,14 +122,6 @@ class Ui_MainWindow(object):
                                    "")
         self.Almacen.setObjectName("Almacen")
 
-        self.Devoluciones_5 = QtWidgets.QPushButton(parent=self.frame_3)
-        self.Devoluciones_5.setEnabled(True)
-        self.Devoluciones_5.setGeometry(QtCore.QRect(0, 620, 201, 41))
-        self.Devoluciones_5.setAutoFillBackground(False)
-        self.Devoluciones_5.setStyleSheet("color:#C2C7D0\n"
-                                          "")
-        self.Devoluciones_5.setObjectName("Devoluciones_5")
-
         # Frame para las páginas principales
         self.PagesFrame = QtWidgets.QFrame(parent=self.NameEmpresa)
         self.PagesFrame.setGeometry(QtCore.QRect(200, 50, 901, 791))
@@ -144,7 +136,7 @@ class Ui_MainWindow(object):
         
         # Página 1 (administracion)
         self.page_1 = QtWidgets.QWidget()
-        self.Ui_FormAdministracion =Ui_FormAdministracion()
+        self.Ui_FormAdministracion =Ui_FormADMI()
         self.Ui_FormAdministracion.setupUi(self.page_1)
         self.stackedWidget.addWidget(self.page_1)
 
@@ -174,7 +166,7 @@ class Ui_MainWindow(object):
         
         # Página 6 (almacen)
         self.page_6 = QtWidgets.QWidget()
-        self.Ui_FormAlmacen = Ui_FormAlmacen()
+        self.Ui_FormAlmacen = Ui_FormAmacenf()
         self.Ui_FormAlmacen.setupUi(self.page_6)
         self.stackedWidget.addWidget(self.page_6)
 
@@ -207,7 +199,6 @@ class Ui_MainWindow(object):
         self.Devoluciones.setText(_translate("MainWindow", "Devoluciones"))
         self.Compras.setText(_translate("MainWindow", "compras"))
         self.Almacen.setText(_translate("MainWindow", "Almacen"))
-        self.Devoluciones_5.setText(_translate("MainWindow", "Pèrfil"))
         
     def showAdministracion(self):
         self.stackedWidget.setCurrentIndex(0)
