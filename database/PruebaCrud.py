@@ -11,6 +11,7 @@ class PruebaCrud:
         print("Rol creado correctamente")
         print(rolLeido)
         
+    @staticmethod    
     def pruebaLeer(conn):
         rolLeido2 = Crud.leer(Rol, conn, 1)
         if rolLeido2:
@@ -27,12 +28,14 @@ class PruebaCrud:
         rolLeido=Crud.leer(Rol, conn, rol.idRol)
         print("Rol actualizado correctamente")
         print(rolLeido)
+        
     @staticmethod    
     def pruebaEliminar(conn):
         Crud.eliminar(Rol, conn, 1)
         rolLeido=Crud.leer(Rol, conn, 1)
         print("Rol eliminado correctamente")
         print(rolLeido)
+        
     @staticmethod    
     def pruebaLeerTodos(conn):
         roles=Crud.leerTodos(Rol, conn)
