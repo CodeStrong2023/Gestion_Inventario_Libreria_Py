@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QLabel, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QLabel, QMessageBox, QComboBox, QDateEdit
 import sys
 import pymysql
 
@@ -12,7 +12,8 @@ def get_db_connection():
         cursorclass=pymysql.cursors.DictCursor  # Para obtener resultados como diccionarios
     )
 
-# Funciones CRUD
+# Funciones CRUD para la tabla Usuario
+
 # Crear un nuevo usuario
 def create_user(nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id):
     connection = get_db_connection()
@@ -27,7 +28,7 @@ def create_user(nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usu
     finally:
         connection.close()
 
-# Leer usuarios
+# Leer todos los usuarios
 def read_users():
     connection = get_db_connection()
     try:
@@ -44,7 +45,8 @@ def update_user(id_usuario, nombre, apellido, correo, telefono, fecha_nacimiento
     try:
         with connection.cursor() as cursor:
             sql = """
-            UPDATE Usuario SET nombre=%s, apellido=%s, correo=%s, telefono=%s, fechaNacimiento=%s, imagenUsuario=%s, Direccion_idDireccion=%s, Rol_idRol=%s
+            UPDATE `BD_Libreria`.`Usuario`
+            SET nombre=%s, apellido=%s, correo=%s, telefono=%s, fechaNacimiento=%s, imagenUsuario=%s, Direccion_idDireccion=%s, Rol_idRol=%s
             WHERE idUsuario=%s
             """
             cursor.execute(sql, (nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id, id_usuario))
@@ -57,14 +59,36 @@ def delete_user(id_usuario):
     connection = get_db_connection()
     try:
         with connection.cursor() as cursor:
-            sql = "DELETE FROM Usuario WHERE idUsuario=%s"
+            sql = "DELETE FROM `BD_Libreria`.`Usuario` WHERE idUsuario=%s"
             cursor.execute(sql, (id_usuario,))
         connection.commit()
     finally:
         connection.close()
 
-# Aplicacion PyQt5
-class CRUDApp(QWidget):
+# Leer todas las direcciones
+def read_addresses():
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT idDireccion, calle, numero FROM `BD_Libreria`.`Direccion`")
+            result = cursor.fetchall()
+            return result
+    finally:
+        connection.close()
+
+# Leer todos los roles
+def read_roles():
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT idRol, rol FROM `BD_Libreria`.`Rol`")
+            result = cursor.fetchall()
+            return result
+    finally:
+        connection.close()
+
+# Aplicación PyQt5 para la tabla Usuario
+class UserCRUDApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -75,7 +99,7 @@ class CRUDApp(QWidget):
 
         layout = QVBoxLayout()
 
-        # Campo de entrada y botones
+        # Campos de entrada y botones
         self.nombre_input = QLineEdit(self)
         self.nombre_input.setPlaceholderText('Nombre')
         layout.addWidget(self.nombre_input)
@@ -85,28 +109,31 @@ class CRUDApp(QWidget):
         layout.addWidget(self.apellido_input)
 
         self.correo_input = QLineEdit(self)
-        self.correo_input.setPlaceholderText('Correo')
+        self.correo_input.setPlaceholderText('Correo Electrónico')
         layout.addWidget(self.correo_input)
 
         self.telefono_input = QLineEdit(self)
         self.telefono_input.setPlaceholderText('Teléfono')
         layout.addWidget(self.telefono_input)
 
-        self.fecha_nacimiento_input = QLineEdit(self)
-        self.fecha_nacimiento_input.setPlaceholderText('Fecha de Nacimiento (YYYY-MM-DD)')
+        self.fecha_nacimiento_input = QDateEdit(self)
+        self.fecha_nacimiento_input.setDisplayFormat('yyyy-MM-dd')
+        self.fecha_nacimiento_input.setCalendarPopup(True)
         layout.addWidget(self.fecha_nacimiento_input)
 
         self.imagen_usuario_input = QLineEdit(self)
-        self.imagen_usuario_input.setPlaceholderText('Imagen Usuario')
+        self.imagen_usuario_input.setPlaceholderText('URL de Imagen')
         layout.addWidget(self.imagen_usuario_input)
 
-        self.direccion_id_input = QLineEdit(self)
-        self.direccion_id_input.setPlaceholderText('ID Dirección')
-        layout.addWidget(self.direccion_id_input)
+        # ComboBox para seleccionar la dirección
+        self.direccion_combobox = QComboBox(self)
+        layout.addWidget(self.direccion_combobox)
+        self.load_addresses()
 
-        self.rol_id_input = QLineEdit(self)
-        self.rol_id_input.setPlaceholderText('ID Rol')
-        layout.addWidget(self.rol_id_input)
+        # ComboBox para seleccionar el rol
+        self.rol_combobox = QComboBox(self)
+        layout.addWidget(self.rol_combobox)
+        self.load_roles()
 
         self.create_button = QPushButton('Crear Usuario', self)
         self.create_button.clicked.connect(self.create_user)
@@ -130,27 +157,40 @@ class CRUDApp(QWidget):
         users = read_users()
         self.table.setRowCount(len(users))
         self.table.setColumnCount(9)
-        self.table.setHorizontalHeaderLabels(['ID', 'Nombre', 'Apellido', 'Correo', 'Teléfono', 'Fecha de Nacimiento', 'Imagen', 'ID Dirección', 'ID Rol'])
+        self.table.setHorizontalHeaderLabels(['ID Usuario', 'Nombre', 'Apellido', 'Correo', 'Teléfono', 'Fecha Nacimiento', 'Imagen Usuario', 'ID Dirección', 'ID Rol'])
         for row_idx, user in enumerate(users):
             self.table.setItem(row_idx, 0, QTableWidgetItem(str(user['idUsuario'])))
             self.table.setItem(row_idx, 1, QTableWidgetItem(user['nombre']))
             self.table.setItem(row_idx, 2, QTableWidgetItem(user['apellido']))
             self.table.setItem(row_idx, 3, QTableWidgetItem(user['correo']))
             self.table.setItem(row_idx, 4, QTableWidgetItem(user['telefono']))
-            self.table.setItem(row_idx, 5, QTableWidgetItem(str(user['fechaNacimiento'])))
+            self.table.setItem(row_idx, 5, QTableWidgetItem(user['fechaNacimiento'].strftime('%Y-%m-%d') if user['fechaNacimiento'] else ''))
             self.table.setItem(row_idx, 6, QTableWidgetItem(user['imagenUsuario']))
             self.table.setItem(row_idx, 7, QTableWidgetItem(str(user['Direccion_idDireccion'])))
             self.table.setItem(row_idx, 8, QTableWidgetItem(str(user['Rol_idRol'])))
+
+    def load_addresses(self):
+        addresses = read_addresses()
+        self.direccion_combobox.clear()
+        for address in addresses:
+            display_text = f"{address['idDireccion']}: {address['calle']} {address['numero']}"
+            self.direccion_combobox.addItem(display_text, address['idDireccion'])
+
+    def load_roles(self):
+        roles = read_roles()
+        self.rol_combobox.clear()
+        for role in roles:
+            self.rol_combobox.addItem(role['rol'], role['idRol'])
 
     def create_user(self):
         nombre = self.nombre_input.text()
         apellido = self.apellido_input.text()
         correo = self.correo_input.text()
         telefono = self.telefono_input.text()
-        fecha_nacimiento = self.fecha_nacimiento_input.text()
+        fecha_nacimiento = self.fecha_nacimiento_input.date().toString('yyyy-MM-dd')
         imagen_usuario = self.imagen_usuario_input.text()
-        direccion_id = int(self.direccion_id_input.text())
-        rol_id = int(self.rol_id_input.text())
+        direccion_id = self.direccion_combobox.currentData()
+        rol_id = self.rol_combobox.currentData()
 
         create_user(nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id)
         self.load_data()
@@ -166,10 +206,10 @@ class CRUDApp(QWidget):
         apellido = self.apellido_input.text()
         correo = self.correo_input.text()
         telefono = self.telefono_input.text()
-        fecha_nacimiento = self.fecha_nacimiento_input.text()
+        fecha_nacimiento = self.fecha_nacimiento_input.date().toString('yyyy-MM-dd')
         imagen_usuario = self.imagen_usuario_input.text()
-        direccion_id = int(self.direccion_id_input.text())
-        rol_id = int(self.rol_id_input.text())
+        direccion_id = self.direccion_combobox.currentData()
+        rol_id = self.rol_combobox.currentData()
 
         update_user(id_usuario, nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id)
         self.load_data()
@@ -186,6 +226,6 @@ class CRUDApp(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = CRUDApp()
+    window = UserCRUDApp()
     window.show()
     sys.exit(app.exec_())
