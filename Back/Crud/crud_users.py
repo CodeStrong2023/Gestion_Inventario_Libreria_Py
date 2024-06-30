@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QLabel, QMessageBox, QComboBox, QDateEdit
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QLabel, QMessageBox, QComboBox, QDateEdit, QFileDialog
 import sys
 import pymysql
 
@@ -121,9 +121,14 @@ class UserCRUDApp(QWidget):
         self.fecha_nacimiento_input.setCalendarPopup(True)  # Mostrar calendario emergente
         layout.addWidget(self.fecha_nacimiento_input)
 
-        self.imagen_usuario_input = QLineEdit(self)
-        self.imagen_usuario_input.setPlaceholderText('URL de Imagen')
-        layout.addWidget(self.imagen_usuario_input)
+        # Etiqueta y botón para seleccionar la imagen del usuario
+        self.imagen_usuario_label = QLabel('Seleccionar Imagen de Usuario:')
+        layout.addWidget(self.imagen_usuario_label)
+
+        self.imagen_usuario_path = ''  # Variable para almacenar la ruta de la imagen seleccionada
+        self.select_image_button = QPushButton('Seleccionar Imagen', self)
+        self.select_image_button.clicked.connect(self.select_image)  # Conectar el botón para seleccionar la imagen
+        layout.addWidget(self.select_image_button)
 
         # ComboBox para seleccionar la dirección de un usuario
         self.direccion_combobox = QComboBox(self)
@@ -191,6 +196,15 @@ class UserCRUDApp(QWidget):
         for role in roles:
             self.rol_combobox.addItem(role['rol'], role['idRol'])  # Añadir cada rol al ComboBox
 
+    # Selección de imagen de usuario
+    def select_image(self):
+        options = QFileDialog.Options()  # Opciones para el diálogo de archivo
+        # Abrir el diálogo para seleccionar un archivo de imagen
+        file_path, _ = QFileDialog.getOpenFileName(self, "Seleccionar Imagen de Usuario", "", "Image Files (*.png *.jpg *.jpeg *.gif)", options=options)
+        if file_path:  # Si se selecciona una imagen
+            self.imagen_usuario_path = file_path  # Almacenar la ruta de la imagen seleccionada
+            self.imagen_usuario_label.setText(f'Imagen seleccionada: {file_path}')  # Actualizar la etiqueta para mostrar la ruta de la imagen
+
     # Crear un nuevo usuario
     def create_user(self):
         # Obtener los valores de los campos de entrada
@@ -199,7 +213,7 @@ class UserCRUDApp(QWidget):
         correo = self.correo_input.text()
         telefono = self.telefono_input.text()
         fecha_nacimiento = self.fecha_nacimiento_input.date().toString('yyyy-MM-dd')
-        imagen_usuario = self.imagen_usuario_input.text()
+        imagen_usuario = self.imagen_usuario_path  # Usar la ruta de la imagen seleccionada
         direccion_id = self.direccion_combobox.currentData()
         rol_id = self.rol_combobox.currentData()
 
@@ -220,7 +234,7 @@ class UserCRUDApp(QWidget):
         correo = self.correo_input.text()
         telefono = self.telefono_input.text()
         fecha_nacimiento = self.fecha_nacimiento_input.date().toString('yyyy-MM-dd')
-        imagen_usuario = self.imagen_usuario_input.text()
+        imagen_usuario = self.imagen_usuario_path  # Usar la ruta de la imagen seleccionada
         direccion_id = self.direccion_combobox.currentData()
         rol_id = self.rol_combobox.currentData()
 
