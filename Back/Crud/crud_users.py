@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTa
 import sys
 import pymysql
 
-# Función para conectar a la base de datos
+# Función para conectar a la base de datos MySQL
 def get_db_connection():
     return pymysql.connect(
         host='127.0.0.1',  # Dirección del servidor MySQL
@@ -24,7 +24,7 @@ def create_user(nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usu
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id))
-        connection.commit()
+        connection.commit()  # Confirmar la transacción
     finally:
         connection.close()
 
@@ -34,12 +34,12 @@ def read_users():
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM `BD_Libreria`.`Usuario`")
-            result = cursor.fetchall()
+            result = cursor.fetchall()  # Obtener todos los resultados
             return result
     finally:
         connection.close()
 
-# Actualizar un usuario
+# Actualizar un usuario existente
 def update_user(id_usuario, nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id):
     connection = get_db_connection()
     try:
@@ -50,7 +50,7 @@ def update_user(id_usuario, nombre, apellido, correo, telefono, fecha_nacimiento
             WHERE idUsuario=%s
             """
             cursor.execute(sql, (nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id, id_usuario))
-        connection.commit()
+        connection.commit()  # Confirmar la transacción
     finally:
         connection.close()
 
@@ -61,28 +61,28 @@ def delete_user(id_usuario):
         with connection.cursor() as cursor:
             sql = "DELETE FROM `BD_Libreria`.`Usuario` WHERE idUsuario=%s"
             cursor.execute(sql, (id_usuario,))
-        connection.commit()
+        connection.commit()  # Confirmar la transacción
     finally:
         connection.close()
 
-# Leer todas las direcciones
+# Leer todas las direcciones disponibles
 def read_addresses():
     connection = get_db_connection()
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT idDireccion, calle, numero FROM `BD_Libreria`.`Direccion`")
-            result = cursor.fetchall()
+            result = cursor.fetchall()  # Obtener todos los resultados
             return result
     finally:
         connection.close()
 
-# Leer todos los roles
+# Leer todos los roles disponibles
 def read_roles():
     connection = get_db_connection()
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT idRol, rol FROM `BD_Libreria`.`Rol`")
-            result = cursor.fetchall()
+            result = cursor.fetchall()  # Obtener todos los resultados
             return result
     finally:
         connection.close()
@@ -91,18 +91,18 @@ def read_roles():
 class UserCRUDApp(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.initUI()  # Inicializa la interfaz de usuario
 
     def initUI(self):
-        self.setWindowTitle('CRUD de Usuario')
-        self.setGeometry(100, 100, 800, 600)
+        self.setWindowTitle('CRUD de Usuario')  # Título de la ventana
+        self.setGeometry(100, 100, 800, 600)  # Dimensiones de la ventana
 
-        layout = QVBoxLayout()
+        layout = QVBoxLayout()  # Layout vertical principal para la ventana
 
-        # Campos de entrada y botones
+        # Campos de entrada para los datos del usuario
         self.nombre_input = QLineEdit(self)
-        self.nombre_input.setPlaceholderText('Nombre')
-        layout.addWidget(self.nombre_input)
+        self.nombre_input.setPlaceholderText('Nombre')  # Texto de ayuda en el campo
+        layout.addWidget(self.nombre_input)  # Añadir el campo al layout
 
         self.apellido_input = QLineEdit(self)
         self.apellido_input.setPlaceholderText('Apellido')
@@ -117,47 +117,54 @@ class UserCRUDApp(QWidget):
         layout.addWidget(self.telefono_input)
 
         self.fecha_nacimiento_input = QDateEdit(self)
-        self.fecha_nacimiento_input.setDisplayFormat('yyyy-MM-dd')
-        self.fecha_nacimiento_input.setCalendarPopup(True)
+        self.fecha_nacimiento_input.setDisplayFormat('yyyy-MM-dd')  # Formato de la fecha
+        self.fecha_nacimiento_input.setCalendarPopup(True)  # Mostrar calendario emergente
         layout.addWidget(self.fecha_nacimiento_input)
 
         self.imagen_usuario_input = QLineEdit(self)
         self.imagen_usuario_input.setPlaceholderText('URL de Imagen')
         layout.addWidget(self.imagen_usuario_input)
 
-        # ComboBox para seleccionar la dirección
+        # ComboBox para seleccionar la dirección de un usuario
         self.direccion_combobox = QComboBox(self)
         layout.addWidget(self.direccion_combobox)
-        self.load_addresses()
+        self.load_addresses()  # Cargar direcciones disponibles en el ComboBox
 
-        # ComboBox para seleccionar el rol
+        # ComboBox para seleccionar el rol de un usuario
         self.rol_combobox = QComboBox(self)
         layout.addWidget(self.rol_combobox)
-        self.load_roles()
+        self.load_roles()  # Cargar roles disponibles en el ComboBox
 
+        # Botón para crear un nuevo usuario
         self.create_button = QPushButton('Crear Usuario', self)
-        self.create_button.clicked.connect(self.create_user)
+        self.create_button.clicked.connect(self.create_user)  # Conectar el evento de clic con la función create_user
         layout.addWidget(self.create_button)
 
+        # Botón para actualizar un usuario existente
         self.update_button = QPushButton('Actualizar Usuario', self)
-        self.update_button.clicked.connect(self.update_user)
+        self.update_button.clicked.connect(self.update_user)  # Conectar el evento de clic con la función update_user
         layout.addWidget(self.update_button)
 
+        # Botón para eliminar un usuario seleccionado
         self.delete_button = QPushButton('Eliminar Usuario', self)
-        self.delete_button.clicked.connect(self.delete_user)
+        self.delete_button.clicked.connect(self.delete_user)  # Conectar el evento de clic con la función delete_user
         layout.addWidget(self.delete_button)
 
+        # Tabla para mostrar la lista de usuarios
         self.table = QTableWidget(self)
         layout.addWidget(self.table)
 
-        self.setLayout(layout)
-        self.load_data()
+        self.setLayout(layout)  # Establecer el layout principal para la ventana
+        self.load_data()  # Cargar datos iniciales en la tabla
 
+    # Cargar los datos de los usuarios en la tabla
     def load_data(self):
-        users = read_users()
-        self.table.setRowCount(len(users))
-        self.table.setColumnCount(9)
+        users = read_users()  # Leer los datos de los usuarios desde la base de datos
+        self.table.setRowCount(len(users))  # Establecer el número de filas de la tabla
+        self.table.setColumnCount(9)  # Establecer el número de columnas de la tabla
         self.table.setHorizontalHeaderLabels(['ID Usuario', 'Nombre', 'Apellido', 'Correo', 'Teléfono', 'Fecha Nacimiento', 'Imagen Usuario', 'ID Dirección', 'ID Rol'])
+        
+        # Rellenar la tabla con los datos de los usuarios
         for row_idx, user in enumerate(users):
             self.table.setItem(row_idx, 0, QTableWidgetItem(str(user['idUsuario'])))
             self.table.setItem(row_idx, 1, QTableWidgetItem(user['nombre']))
@@ -169,20 +176,24 @@ class UserCRUDApp(QWidget):
             self.table.setItem(row_idx, 7, QTableWidgetItem(str(user['Direccion_idDireccion'])))
             self.table.setItem(row_idx, 8, QTableWidgetItem(str(user['Rol_idRol'])))
 
+    # Cargar las direcciones disponibles en el ComboBox
     def load_addresses(self):
-        addresses = read_addresses()
-        self.direccion_combobox.clear()
+        addresses = read_addresses()  # Leer las direcciones desde la base de datos
+        self.direccion_combobox.clear()  # Limpiar el ComboBox
         for address in addresses:
             display_text = f"{address['idDireccion']}: {address['calle']} {address['numero']}"
-            self.direccion_combobox.addItem(display_text, address['idDireccion'])
+            self.direccion_combobox.addItem(display_text, address['idDireccion'])  # Añadir cada dirección al ComboBox
 
+    # Cargar los roles disponibles en el ComboBox
     def load_roles(self):
-        roles = read_roles()
-        self.rol_combobox.clear()
+        roles = read_roles()  # Leer los roles desde la base de datos
+        self.rol_combobox.clear()  # Limpiar el ComboBox
         for role in roles:
-            self.rol_combobox.addItem(role['rol'], role['idRol'])
+            self.rol_combobox.addItem(role['rol'], role['idRol'])  # Añadir cada rol al ComboBox
 
+    # Crear un nuevo usuario
     def create_user(self):
+        # Obtener los valores de los campos de entrada
         nombre = self.nombre_input.text()
         apellido = self.apellido_input.text()
         correo = self.correo_input.text()
@@ -192,15 +203,17 @@ class UserCRUDApp(QWidget):
         direccion_id = self.direccion_combobox.currentData()
         rol_id = self.rol_combobox.currentData()
 
-        create_user(nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id)
-        self.load_data()
+        create_user(nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id)  # Crear usuario en la base de datos
+        self.load_data()  # Recargar los datos de la tabla
 
+    # Actualizar un usuario existente
     def update_user(self):
-        selected = self.table.currentRow()
+        selected = self.table.currentRow()  # Obtener la fila seleccionada en la tabla
         if selected < 0:
-            QMessageBox.warning(self, 'Error', 'Selecciona un usuario para actualizar')
+            QMessageBox.warning(self, 'Error', 'Selecciona un usuario para actualizar')  # Mostrar mensaje de error si no hay fila seleccionada
             return
 
+        # Obtener los valores de los campos de entrada y el ID del usuario seleccionado
         id_usuario = int(self.table.item(selected, 0).text())
         nombre = self.nombre_input.text()
         apellido = self.apellido_input.text()
@@ -211,21 +224,23 @@ class UserCRUDApp(QWidget):
         direccion_id = self.direccion_combobox.currentData()
         rol_id = self.rol_combobox.currentData()
 
-        update_user(id_usuario, nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id)
-        self.load_data()
+        update_user(id_usuario, nombre, apellido, correo, telefono, fecha_nacimiento, imagen_usuario, direccion_id, rol_id)  # Actualizar usuario en la base de datos
+        self.load_data()  # Recargar los datos de la tabla
 
+    # Eliminar un usuario seleccionado
     def delete_user(self):
-        selected = self.table.currentRow()
+        selected = self.table.currentRow()  # Obtener la fila seleccionada en la tabla
         if selected < 0:
-            QMessageBox.warning(self, 'Error', 'Selecciona un usuario para eliminar')
+            QMessageBox.warning(self, 'Error', 'Selecciona un usuario para eliminar')  # Mostrar mensaje de error si no hay fila seleccionada
             return
 
-        id_usuario = int(self.table.item(selected, 0).text())
-        delete_user(id_usuario)
-        self.load_data()
+        id_usuario = int(self.table.item(selected, 0).text())  # Obtener el ID del usuario seleccionado
+        delete_user(id_usuario)  # Eliminar usuario de la base de datos
+        self.load_data()  # Recargar los datos de la tabla
 
+# Punto de entrada principal para la aplicación
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = UserCRUDApp()
-    window.show()
-    sys.exit(app.exec_())
+    app = QApplication(sys.argv)  # Crear la aplicación PyQt5
+    window = UserCRUDApp()  # Crear la ventana de la aplicación
+    window.show()  # Mostrar la ventana
+    sys.exit(app.exec_())  # Ejecutar el ciclo de eventos de la aplicación
