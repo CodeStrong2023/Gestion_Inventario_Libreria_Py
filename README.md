@@ -5,11 +5,29 @@ Aplicación de escritorio orientada a realizar las funciones de administración 
 ## Tecnologías
 La aplicación está desarrollada con las siguientes tecnologías:
 - Python
-- MySQL
-- PyQT
+- SQLite3
+- PyQT6
+
+
+## Instrucciones de uso
+### Clonación del Repositorio:
+- git clone https://github.com/UTN-FRSR-TUP/Gestion_Inventario_Libreria_Py
+- cd Gestion_Inventario_Libreria_Py
+
+### Creación de Entorno Virtual:
+- python -m venv env
 - 
+### Activación del Entorno Virtual:
+- .\env\Scripts\activate
+En macOS y Linux:
 
+- source env/bin/activate
+### Instalación de Dependencias:
+- pip install -r requirements.txt
 
+### Ejecución de la Aplicación
+Ejecutar app.py:
+- python app.py
 
 ## Autor(es)
 Grupo UTN MMXXIII de la Tecnicatura en Programación de la UTN:
