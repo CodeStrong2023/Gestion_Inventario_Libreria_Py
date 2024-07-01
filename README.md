@@ -9,28 +9,6 @@ La aplicación está desarrollada con las siguientes tecnologías:
 - PyQT
 - 
 
-## Características Principales
-- 
-
-## Requisitos del Sistema
-- 
-
-## Instrucciones de Instalación
-Para probar la aplicación localmente, sigue estos pasos:
-
-### 
-- 
-
-
-### 
-- 
-
-## Uso Básico
-- 
-
-
-
-## Version portable
 
 
 ## Autor(es)
