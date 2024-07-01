@@ -16,7 +16,7 @@ La aplicación está desarrollada con las siguientes tecnologías:
 
 ### Creación de Entorno Virtual:
 - python -m venv env
-- 
+
 ### Activación del Entorno Virtual:
 - .\env\Scripts\activate
 En macOS y Linux:
