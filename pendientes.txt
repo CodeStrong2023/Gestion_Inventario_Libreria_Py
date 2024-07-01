@@ -1,0 +1,9 @@
+Queda arreglar actualizar: con paises.nombre crashea porque espera id 
+
+si busco "administrador" no devuelve ningun resultado rol
+faltan vistas funcionales de: articulos, compras, devoluciones, ventas
+
+detalles visuales de alto de input y header de columna que sale cortado (fechaNacimiento)
+control de datos ingresados por combobox y ¿calendario?
+
+
